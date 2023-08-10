@@ -15,6 +15,12 @@
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <style>
+        *{
+            scroll-behavior: smooth;
+        }
+    </style>
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -23,9 +29,9 @@
         <main  class="d-flex justify-content-center">
             <div style="max-width: 500px;" class="col">
                 <nav style="z-index: 100" class="d-flex justify-content-around p-1 fs-4 bg-info position-sticky top-0 mb-2">
-                    <a class=" nav-link" href="#"><i class="fa-solid fa-house"></i></a>
-                    <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-                    <a class="nav-link" href="#"><i class="fa-regular fa-pen-to-square"></i></a>
+                    <a class=" nav-link" href="{{ url('/') }}"><i class="fa-solid fa-house"></i></a>
+                    <a class="nav-link" href="{{ url('search/page') }}"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    <a class="nav-link" href="{{ url('insert/page') }}"><i class="fa-regular fa-pen-to-square"></i></a>
                     <a class="nav-link" href="#"><i class="fa-regular fa-heart"></i></a>
                     <a class="nav-link" href="#"><i class="fa-regular fa-user"></i></a>
                 </nav>
@@ -36,6 +42,8 @@
 
     {{-- Jquery CDN --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.6.7/jquery.timeago.min.js"></script>
 
     @yield('socialJs')
 </body>

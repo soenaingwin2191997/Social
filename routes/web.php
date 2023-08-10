@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FollowerController;
+use App\Http\Controllers\InsertController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,10 +22,20 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/',[PostController::class,'index']);
+Route::post('post/add',[PostController::class,'create']);
 
 Route::get('like/add',[LikeController::class,'create']);
+Route::get('like/show',[LikeController::class,'show']);
 
 Route::get('comment/add',[CommentController::class,'create']);
+Route::get('comment/show',[CommentController::class,'show']);
+
+Route::get('search/page',[SearchController::class,'index']);
+
+Route::get('insert/page',[InsertController::class,'index']);
+
+Route::get('follow',[FollowerController::class,'create']);
+Route::get('unfollow',[FollowerController::class,'delete']);
 
 Auth::routes();
 
