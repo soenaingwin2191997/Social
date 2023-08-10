@@ -10,7 +10,8 @@
                         alt="Photo">
                 </div>
                 <div class="ps-3 py-1">
-                    <span id="userName" class="fw-bold">{{ Auth::user()->name }}</span>
+                    <h5 class="h6 fw-bold">{{ Auth::user()->name }}</h5>
+                    <h5 class="h6">{{ App\Models\Follower::where('receiver',Auth::user()->id)->count() }} Followers</h5>
                 </div>
             </div>
         </div>

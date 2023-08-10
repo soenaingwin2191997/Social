@@ -9,9 +9,9 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::select('*', 'posts.id as id')
+        $posts = Post::select('*', 'posts.id as id','users.id as user_id')
             ->join('users', 'posts.user_id', 'users.id')
-            ->orderBy('posts.id','DESC')->get();
+            ->inRandomOrder()->paginate(50);
         return view('social.index', ['posts' => $posts]);
     }
 

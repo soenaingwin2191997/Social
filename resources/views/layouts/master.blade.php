@@ -19,6 +19,21 @@
         *{
             scroll-behavior: smooth;
         }
+        a{
+            text-decoration: none !important;
+        }
+        .btn{
+            background: rgb(96, 96, 207) !important;
+            color: white !important;
+            font-weight: bold !important;
+        }
+        .btn:hover{
+            background: rgb(39, 39, 224) !important;
+        }
+        .btn-active{
+            background: rgb(39, 39, 224) !important;
+        }
+        
     </style>
 
     <!-- Scripts -->
@@ -32,8 +47,8 @@
                     <a class=" nav-link" href="{{ url('/') }}"><i class="fa-solid fa-house"></i></a>
                     <a class="nav-link" href="{{ url('search/page') }}"><i class="fa-solid fa-magnifying-glass"></i></a>
                     <a class="nav-link" href="{{ url('insert/page') }}"><i class="fa-regular fa-pen-to-square"></i></a>
-                    <a class="nav-link" href="#"><i class="fa-regular fa-heart"></i></a>
-                    <a class="nav-link" href="#"><i class="fa-regular fa-user"></i></a>
+                    <a class="nav-link" href="{{ url('follower/page') }}"><i class="fa-regular fa-heart"></i></a>
+                    <a class="nav-link" href="{{ url('profile/page',Auth::user()->id) }}"><i class="fa-regular fa-user"></i></a>
                 </nav>
                 @yield('content')
             </div>

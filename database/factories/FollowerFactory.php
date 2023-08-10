@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Follower>
  */
-class PostFactory extends Factory
+class FollowerFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,9 +17,8 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id'=>rand(1,1000),
-            'caption'=>$this->faker->paragraph(),
-            'photo'=>"photo".rand(1,100).".jpg",
+            'sender'=>rand(1,1000),
+            'receiver'=>rand(1,1000),
         ];
     }
 }

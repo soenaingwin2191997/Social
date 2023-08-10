@@ -5,6 +5,7 @@ use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\InsertController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -25,10 +26,10 @@ Route::get('/',[PostController::class,'index']);
 Route::post('post/add',[PostController::class,'create']);
 
 Route::get('like/add',[LikeController::class,'create']);
-Route::get('like/show',[LikeController::class,'show']);
+Route::get('like/show',[LikeController::class,'show']);  // For Ajax
 
 Route::get('comment/add',[CommentController::class,'create']);
-Route::get('comment/show',[CommentController::class,'show']);
+Route::get('comment/show',[CommentController::class,'show']);  // For Ajax
 
 Route::get('search/page',[SearchController::class,'index']);
 
@@ -36,6 +37,11 @@ Route::get('insert/page',[InsertController::class,'index']);
 
 Route::get('follow',[FollowerController::class,'create']);
 Route::get('unfollow',[FollowerController::class,'delete']);
+
+Route::get('follower/page',[FollowerController::class,'index']);
+Route::get('follower/page/{action}/{id}',[FollowerController::class,'show']); // For action
+
+Route::get('profile/page/{id}',[ProfileController::class,'index']);
 
 Auth::routes();
 

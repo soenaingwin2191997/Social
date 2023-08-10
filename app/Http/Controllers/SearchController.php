@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class SearchController extends Controller
 {
     function index(){
-        $users=User::all();
+        $users=User::inRandomOrder()->limit(100)->get();
         return view('social.search',['users'=>$users]);
     }
 }

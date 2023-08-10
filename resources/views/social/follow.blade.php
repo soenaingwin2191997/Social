@@ -1,6 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
+    <div class="col d-flex">
+        <a href="{{ url('follower/page') }}" class="btn {{ $action=='all'? 'btn-active':'' }} m-1 px-4">All</a>
+        <a href="{{ url('follower/page/followers',Auth::user()->id) }}" class="btn {{ $action=='followers'?'btn-active':'' }} m-1">Followers</a>
+        <a href="{{ url('follower/page/following',Auth::user()->id) }}" class="btn {{ $action=='following'?'btn-active':'' }} m-1">Followeing</a>
+    </div>
+    <hr>
     <div class="col">
         <input type="hidden" id="senderId" value="{{ Auth::user()->id }}">
         @foreach ($users as $user)
@@ -37,7 +43,7 @@
                 $senderId=$('#senderId').val();
 
                 if($(this).text()=="Follow"){
-                    $(this).text("Unfollow");
+                    $(this).text("Following");
                     $.ajax({
                         type:'get',
                         url:"{{ url('follow') }}",

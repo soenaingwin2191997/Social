@@ -2,58 +2,94 @@
 
 @section('content')
     <div class="col">
-        @foreach ($posts as $post)
-            <div id="parent" class="card shadow my-1">
-                <div id="post">
-                    <input type="hidden" value="{{ $post->id }}" id="postId">
-                    <input type="hidden" value="{{ Auth::user()->id }}" id="userId">
-                    <div class="col d-flex">
-                        <div class="col d-flex p-2">
-                            <div style="border-radius: 50%; border: 3px solid gray; width:60px; height:60px;"
-                                class=" overflow-hidden">
-                                <img style="object-fit: cover;" class="w-100 h-100"
-                                    src="{{ asset('storage/profile_photos/' . $post->profile_photo) }}" alt="">
-                            </div>
-                            <div class="px-2 py-1">
-                                <a href="{{ url('profile/page',$post->user_id) }}"><h5 id="userName" class="fw-bold h6">{{ $post->name }}</h5></a>
-                                <h5 class="h6">{{ $post->created_at->diffForHumans() }}</h5>
-                            </div>
-                        </div>
-                        <div class="col-2 text-end p-3">
-                            <span><i class="fa-solid fa-ellipsis"></i></span>
-                        </div>
+        <div class="card my-4 shadow">
+            <div class="card-body d-flex">
+                <div class="col-4">
+                    <div style="border-radius: 50%; border: 3px solid gray; width:60px;    height:60px;"
+                        class=" overflow-hidden m-auto">
+                        <img style="object-fit: cover;" class="w-100 h-100"
+                            src="{{ asset('storage/profile_photos/'.$user->profile_photo) }}" alt="Photo">
                     </div>
-                    <div class="p-2">
-                        <p>{{ $post->caption }}</p>
-                    </div>
-                    <div class="col p-2">
-                        <img class="w-100 rounded" src="{{ asset('storage/post_photos/' . $post->photo) }}" alt="">
+                    <div class="text-center">
+                        <span class="fw-bold">{{ $user->name }}</span>
                     </div>
                 </div>
-                <div class="col p-2">
-                    @if (App\Models\Like::where('post_id', $post->id)->where('user_id', Auth::user()->id)->first())
-                        <button type="button" postId={{ $post->id }} class="btn likeBtn text-danger"><i id="likeHeart"
-                                class="fa-solid fa-heart fs-5"></i></button>
-                    @else
-                        <button type="button" postId={{ $post->id }} class="btn likeBtn"><i id="likeHeart"
-                                class="fa-regular fa-heart fs-5"></i></button>
-                    @endif
-
-                    <button type="button" class="btn commentAddBtn" data-bs-toggle="modal" data-bs-target="#commentAddModal"><i
-                            class="fa-regular fa-comment fs-5"></i></button>
-                    <button type="button" class="btn"><i class="fa-regular fa-paper-plane fs-5"></i></button>
+                <div class="col d-flex justify-content-center align-items-center">
+                    <div class="">
+                        <span class="h6 d-block fw-bold text-center">
+                            {{ $posts->count() }}
+                        </span>
+                        <span>posts</span>
+                    </div>
                 </div>
-                <div class="ps-4 pb-2">
-                    <a href="#" class="likeModalBtn" data-bs-toggle="modal" data-bs-target="#likeModal">
-                        <span id="likeCount" class="me-1 fw-bold">{{ $post->likes->count() }}</span><span
-                            class="me-3">Likes</span>
-                    </a>
-                    <a href="#" class="commentModalBtn" data-bs-toggle="modal" data-bs-target="#commentShowModal"><span class="fw-bold">{{ $post->comments->count() }}</span> replies</a>
+                <div class="col d-flex justify-content-center align-items-center">
+                    <div class="">
+                        <span class="h6 d-block fw-bold text-center">{{ $followers }}</span>
+                        <span>Followers</span>
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-center align-items-center">
+                    <div class="">
+                        <span class="h6 d-block fw-bold text-center">{{ $following }}</span>
+                        <span>Following</span>
+                    </div>
                 </div>
             </div>
-        @endforeach
-        {{ $posts->links() }}
+        </div>
+        <div class="col my-4">
+            @foreach ($posts as $post)
+                <div id="parent" class="card shadow my-1">
+                    <div id="post">
+                        <input type="hidden" value="{{ $post->id }}" id="postId">
+                        <input type="hidden" value="{{ Auth::user()->id }}" id="userId">
+                        <div class="col d-flex">
+                            <div class="col d-flex p-2">
+                                <div style="border-radius: 50%; border: 3px solid gray; width:60px; height:60px;"
+                                    class=" overflow-hidden">
+                                    <img style="object-fit: cover;" class="w-100 h-100"
+                                        src="{{ asset('storage/profile_photos/' . $post->profile_photo) }}" alt="">
+                                </div>
+                                <div class="px-2 py-1">
+                                    <h5 id="userName" class="fw-bold h6">{{ $post->name }}</h5>
+                                    <h5 class="h6">{{ $post->created_at->diffForHumans() }}</h5>
+                                </div>
+                            </div>
+                            <div class="col-2 text-end p-3">
+                                <span><i class="fa-solid fa-ellipsis"></i></span>
+                            </div>
+                        </div>
+                        <div class="p-2">
+                            <p>{{ $post->caption }}</p>
+                        </div>
+                        <div class="col p-2">
+                            <img class="w-100 rounded" src="{{ asset('storage/post_photos/' . $post->photo) }}" alt="">
+                        </div>
+                    </div>
+                    <div class="col p-2">
+                        @if (App\Models\Like::where('post_id', $post->id)->where('user_id', Auth::user()->id)->first())
+                            <button type="button" postId={{ $post->id }} class="btn likeBtn text-danger"><i id="likeHeart"
+                                    class="fa-solid fa-heart fs-5"></i></button>
+                        @else
+                            <button type="button" postId={{ $post->id }} class="btn likeBtn"><i id="likeHeart"
+                                    class="fa-regular fa-heart fs-5"></i></button>
+                        @endif
+    
+                        <button type="button" class="btn commentAddBtn" data-bs-toggle="modal" data-bs-target="#commentAddModal"><i
+                                class="fa-regular fa-comment fs-5"></i></button>
+                        <button type="button" class="btn"><i class="fa-regular fa-paper-plane fs-5"></i></button>
+                    </div>
+                    <div class="ps-4 pb-2">
+                        <a href="#" class="likeModalBtn" data-bs-toggle="modal" data-bs-target="#likeModal">
+                            <span id="likeCount" class="me-1 fw-bold">{{ $post->likes->count() }}</span><span
+                                class="me-3">Likes</span>
+                        </a>
+                        <a href="#" class="commentModalBtn" data-bs-toggle="modal" data-bs-target="#commentShowModal"><span class="fw-bold">{{ $post->comments->count() }}</span> replies</a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
+
 
     {{-- For Comment Add Modal --}}
 
@@ -219,7 +255,7 @@
                                     </div>
                                 </div>
                                 <div class="col-4 text-end p-3">
-                                    <button type="button" class="btn followAddBtn btn-sm px-3">Follow</button>
+                                    <button type="button" class="btn btn-info followAddBtn btn-sm px-3">Follow</button>
                                 </div>
                             </div>
                             `;

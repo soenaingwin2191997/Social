@@ -7,6 +7,7 @@ use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
+use App\Models\Follower;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
@@ -17,10 +18,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(500)->create();
+        User::factory(999)->create();
         Post::factory(100)->create();
         Like::factory(1000)->create();
         Comment::factory(1000)->create();
+        Follower::factory(10000)->create();
 
         \App\Models\User::factory()->create([
             'name' => "Soe Naing Win",
